@@ -31,9 +31,10 @@ public class AccountDAOImpl implements AccountDAO {
         // for academic purposes..  simulate an exception
         if (tripWire) {
             throw new RuntimeException("No soup for you!!!!");
+        } else {
+            return List.of(
+                    new Account("fatih", "12345"),
+                    new Account("furkan", "1234567"));
         }
-        return List.of(
-                new Account("fatih", "12345"),
-                new Account("furkan", "1234567"));
     }
 }
