@@ -2,6 +2,7 @@ package com.faeren.aopdemo.aspect;
 
 import com.faeren.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
@@ -13,6 +14,24 @@ import java.util.List;
 @Component
 @Order(3)
 public class MyDemoLoggingAspect {
+
+    @Around("execution(* com.faeren.aopdemo.service.*.getFortune(..))")
+    public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        String methodName = proceedingJoinPoint.getSignature().toShortString();
+        System.out.println("\n========>>>>>>> Executing @Around on method: " + methodName);
+
+        long begin = System.currentTimeMillis();
+
+        Object result = proceedingJoinPoint.proceed();
+
+        long end = System.currentTimeMillis();
+
+        long duration = end - begin;
+
+        System.out.println("======>>>>> Duration : " + duration / 1000.0 + " secondns");
+
+        return result;
+    }
 
     //add a new advice for @AfterThrowing on the accounts method
     @After("execution(* com.faeren.aopdemo.dao.AccountDAO.findAccounts())")
@@ -62,8 +81,8 @@ public class MyDemoLoggingAspect {
         });
     }
 
-    //@Before("execution(* com.faeren..add*(..))") bunu yaparak hata aldı enterasan bir biçimde
-    @Before("com.faeren.aopdemo.aspect.LuvAopExpressions.forDaoPackage()")
+    //@Before("execution(* com.faeren.add*(..))") bunu yaparak hata aldı enterasan bir biçimde
+    @Before("com.faeren.aopdemo.aspect.SampleExpressions.forDaoPackage()")
     public void beforeAddAccountAdvice(JoinPoint joinPoint) {
         System.out.println("\n =====>>>>> @Before advice çalıştı on addAccountMethod()");
 

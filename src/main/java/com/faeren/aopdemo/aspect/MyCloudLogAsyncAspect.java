@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class MyCloudLogAsyncAspect {
 
 
-    @Before("com.faeren.aopdemo.aspect.LuvAopExpressions.forDaoPackage()")
+    @Before("com.faeren.aopdemo.aspect.SampleExpressions.forDaoPackage()")
     public void logToCloudAsync() {
         System.out.println("\n =====>>>>> @Before advice >>>>> logToCloudAsync()");
     }

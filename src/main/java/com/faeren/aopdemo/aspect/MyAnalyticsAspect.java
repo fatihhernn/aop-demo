@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Order(2)
 public class MyAnalyticsAspect {
 
-    @Before("com.faeren.aopdemo.aspect.LuvAopExpressions.forDaoPackage()")
+    @Before("com.faeren.aopdemo.aspect.SampleExpressions.forDaoPackage()")
     public void forAnalyticsAdvice() {
         System.out.println("\n =====>>>>> @Before advice >>>>> forAnalyticsAdvice()");
     }

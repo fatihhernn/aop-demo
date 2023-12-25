@@ -4,12 +4,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
-public class LuvAopExpressions {
+public class SampleExpressions {
 
     @Pointcut(value = "execution(* com.faeren.aopdemo.dao.*.*(..))")
     public void forDaoPackage() {
     }
-
-    ;
-
 }
